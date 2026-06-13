@@ -15,40 +15,104 @@
   <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
 </head>
 <body>
+<!-- AUTH_GATE -->
 <div id="g" style="position:fixed;inset:0;z-index:9999;background:#0f1117;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;">
   <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(99,102,241,0.35);border-radius:16px;padding:2.5rem 2rem;width:min(340px,90vw);text-align:center;">
     <div style="width:56px;height:56px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.75rem;">&#128274;</div>
     <h2 style="color:#f1f5f9;margin:0 0 0.5rem;font-size:1.4rem;font-weight:700;">CCT Prep</h2>
     <p style="color:#64748b;font-size:0.88rem;margin:0 0 1.5rem;">Acceso privado</p>
-    <input id="pi" type="password" placeholder="Contrasena" autocomplete="current-password" autofocus
+    <input id="pi" type="password" placeholder="Contrasena" autocomplete="current-password"
       style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem 1rem;color:#f1f5f9;font-size:1rem;outline:none;margin-bottom:0.75rem;font-family:inherit;">
-    <button onclick="ca()"
-      style="width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:8px;padding:0.75rem;color:white;font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:0.3px;">
+    <button id="gb" onclick="ca()"
+      style="width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:8px;padding:0.75rem;color:white;font-size:1rem;font-weight:600;cursor:pointer;">
       Entrar
     </button>
-    <p id="pe" style="color:#ef4444;font-size:0.85rem;margin:0.75rem 0 0;display:none;">Contrasena incorrecta</p>
+    <p id="pe" style="color:#ef4444;font-size:0.85rem;margin:0.75rem 0 0;min-height:1.2em;display:none;line-height:1.4;"></p>
   </div>
 </div>
 <script>
   (function(){
-    if(localStorage.getItem('cct_auth')==='1'){
-      document.getElementById('g').style.display='none';return;
+    var MAX  = 3;
+    var WAIT = 7 * 24 * 60 * 60 * 1000; // 7 dias en ms
+
+    // Ya autenticado
+    if(localStorage.getItem('cct_auth') === '1'){
+      document.getElementById('g').style.display = 'none';
+      return;
     }
-    document.getElementById('pi').addEventListener('keydown',function(e){
-      if(e.key==='Enter')ca();
+
+    // Verificar bloqueo activo
+    var lock = localStorage.getItem('cct_lock');
+    if(lock){
+      var remaining = parseInt(lock) + WAIT - Date.now();
+      if(remaining > 0){
+        var days  = Math.floor(remaining / (24*60*60*1000));
+        var hours = Math.ceil(remaining  / (60*60*1000));
+        var msg   = days >= 1
+          ? 'Bloqueado. Intenta en ' + (days + 1) + ' dias.'
+          : 'Bloqueado. Intenta en ' + hours + ' hora' + (hours !== 1 ? 's.' : '.');
+        showError(msg);
+        lockUI();
+        return;
+      } else {
+        // Bloqueo expirado
+        localStorage.removeItem('cct_lock');
+        localStorage.removeItem('cct_tries');
+      }
+    }
+
+    document.getElementById('pi').focus();
+    document.getElementById('pi').addEventListener('keydown', function(e){
+      if(e.key === 'Enter') ca();
     });
   })();
+
   function ca(){
-    if(document.getElementById('pi').value==='CCT2025'){
-      localStorage.setItem('cct_auth','1');
-      document.getElementById('g').style.display='none';
-    }else{
-      document.getElementById('pe').style.display='block';
-      document.getElementById('pi').value='';
-      document.getElementById('pi').focus();
+    var MAX  = 3;
+    var WAIT = 7 * 24 * 60 * 60 * 1000;
+    var pi   = document.getElementById('pi');
+
+    // Verificar bloqueo (por si acaso)
+    var lock = localStorage.getItem('cct_lock');
+    if(lock && (parseInt(lock) + WAIT - Date.now() > 0)) return;
+
+    if(pi.value === 'CCT2025'){
+      localStorage.setItem('cct_auth', '1');
+      localStorage.removeItem('cct_tries');
+      localStorage.removeItem('cct_lock');
+      document.getElementById('g').style.display = 'none';
+    } else {
+      var tries = parseInt(localStorage.getItem('cct_tries') || '0') + 1;
+      localStorage.setItem('cct_tries', tries);
+      pi.value = '';
+      pi.focus();
+
+      if(tries >= MAX){
+        localStorage.setItem('cct_lock', Date.now().toString());
+        showError('Demasiados intentos. Acceso bloqueado por 7 dias.');
+        lockUI();
+      } else {
+        var left = MAX - tries;
+        showError('Contrasena incorrecta. ' + left + ' intento' + (left !== 1 ? 's' : '') + ' restante' + (left !== 1 ? 's.' : '.'));
+      }
     }
   }
+
+  function showError(msg){
+    var pe = document.getElementById('pe');
+    pe.textContent = msg;
+    pe.style.display = 'block';
+  }
+
+  function lockUI(){
+    document.getElementById('pi').disabled = true;
+    document.getElementById('pi').style.opacity = '0.35';
+    document.getElementById('gb').disabled = true;
+    document.getElementById('gb').style.opacity = '0.35';
+    document.getElementById('gb').style.cursor = 'not-allowed';
+  }
 </script>
+<!-- /AUTH_GATE -->
 
   <nav class="navbar">
     <a href="index.html" class="brand">
