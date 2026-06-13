@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCT Prep — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CCT Prep">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <div class="brand-icon"><i class="bi bi-shield-lock-fill"></i></div>
+      <div class="brand-title">CCT<span>Prep</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active"><i class="bi bi-grid-fill"></i> Inicio</a>
+      <a href="quiz.html" class="nav-link"><i class="bi bi-play-circle-fill"></i> Quiz</a>
+      <a href="commands.html" class="nav-link"><i class="bi bi-terminal-fill"></i> Comandos</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero-card">
+      <div class="hero-left">
+        <div class="hero-badge"><i class="bi bi-award-fill"></i> EC-Council Certification</div>
+        <h1 class="hero-title">Certified<br>Cybersecurity<br>Technician <span>C|CT</span></h1>
+        <p class="hero-desc">
+          Practica con <strong>296</strong> preguntas distribuidas en
+          <strong>22</strong> dominios del temario oficial. Repasa los fallos, aprende los comandos y llega preparado al examen.
+        </p>
+        <div class="hero-actions">
+          <a href="quiz.html?mode=all" class="btn btn-primary btn-lg">
+            <i class="bi bi-lightning-charge-fill"></i> Simulacro Completo
+          </a>
+          <a href="commands.html" class="btn btn-secondary btn-lg">
+            <i class="bi bi-terminal-fill"></i> Estudiar Comandos
+          </a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-val">296</div>
+            <div class="hero-stat-lbl">Preguntas</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">22</div>
+            <div class="hero-stat-lbl">Dominios</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-val" id="stat-acc">--%</div>
+            <div class="hero-stat-lbl">Precisión</div>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-val" id="stat-streak">0</div>
+            <div class="hero-stat-lbl">Racha</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMAIN GRID -->
+    <div class="section-header">
+      <h2 class="section-title">Practicar por Dominio</h2>
+      <p class="section-subtitle">Selecciona un módulo para un quiz enfocado exclusivamente en ese área</p>
+    </div>
+
+    <div class="domain-grid">
+            <a href="quiz.html?domain=Network%20Security%20Controls" class="domain-card" data-domain="Network Security Controls">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Security Controls</div>
+          <div class="domain-card-count">43 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Monitoring%20and%20Analysis" class="domain-card" data-domain="Network Monitoring and Analysis">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Monitoring and Analysis</div>
+          <div class="domain-card-count">36 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Information%20Security%20Threats%20and%20Attacks" class="domain-card" data-domain="Information Security Threats and Attacks">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Information Security Threats and Attacks</div>
+          <div class="domain-card-count">32 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Application%20Security%20and%20Cloud%20Computing" class="domain-card" data-domain="Application Security and Cloud Computing">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Application Security and Cloud Computing</div>
+          <div class="domain-card-count">25 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Data%20Security" class="domain-card" data-domain="Data Security">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Data Security</div>
+          <div class="domain-card-count">23 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Security%20Fundamentals" class="domain-card" data-domain="Network Security Fundamentals">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Security Fundamentals</div>
+          <div class="domain-card-count">11 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Computer%20Forensics" class="domain-card" data-domain="Computer Forensics">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Computer Forensics</div>
+          <div class="domain-card-count">10 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Cryptography" class="domain-card" data-domain="Cryptography">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Cryptography</div>
+          <div class="domain-card-count">10 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Business%20Continuity%20and%20Disaster%20Recovery" class="domain-card" data-domain="Business Continuity and Disaster Recovery">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Business Continuity and Disaster Recovery</div>
+          <div class="domain-card-count">9 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Risk%20Management" class="domain-card" data-domain="Risk Management">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Risk Management</div>
+          <div class="domain-card-count">9 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Identification%2C%20Authentication%20and%20Authorization" class="domain-card" data-domain="Identification, Authentication and Authorization">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Identification, Authentication and Authorization</div>
+          <div class="domain-card-count">8 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=IoT%20and%20OT%20Security" class="domain-card" data-domain="IoT and OT Security">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">IoT and OT Security</div>
+          <div class="domain-card-count">8 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Security%20Controls%20-%20Administrative" class="domain-card" data-domain="Network Security Controls - Administrative">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Security Controls - Administrative</div>
+          <div class="domain-card-count">8 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Security%20Assessment" class="domain-card" data-domain="Network Security Assessment">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Security Assessment</div>
+          <div class="domain-card-count">8 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Mobile%20Device%20Security" class="domain-card" data-domain="Mobile Device Security">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Mobile Device Security</div>
+          <div class="domain-card-count">8 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Incident%20Response" class="domain-card" data-domain="Incident Response">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Incident Response</div>
+          <div class="domain-card-count">8 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Security%20Controls%20-%20Physical" class="domain-card" data-domain="Network Security Controls - Physical">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Security Controls - Physical</div>
+          <div class="domain-card-count">8 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Wireless%20Device%20Security" class="domain-card" data-domain="Wireless Device Security">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Wireless Device Security</div>
+          <div class="domain-card-count">7 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Troubleshooting" class="domain-card" data-domain="Network Troubleshooting">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Troubleshooting</div>
+          <div class="domain-card-count">7 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Traffic%20Monitoring" class="domain-card" data-domain="Network Traffic Monitoring">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Traffic Monitoring</div>
+          <div class="domain-card-count">6 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Network%20Logs%20Monitoring%20and%20Analysis" class="domain-card" data-domain="Network Logs Monitoring and Analysis">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Network Logs Monitoring and Analysis</div>
+          <div class="domain-card-count">6 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+      <a href="quiz.html?domain=Wireless%20Network%20Security" class="domain-card" data-domain="Wireless Network Security">
+        <div class="domain-card-icon"><i class="bi bi-folder-fill"></i></div>
+        <div class="domain-card-body">
+          <div class="domain-card-name">Wireless Network Security</div>
+          <div class="domain-card-count">6 preguntas</div>
+        </div>
+        <div class="domain-card-arrow"><i class="bi bi-arrow-right-short"></i></div>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    const DOMAIN_CFG = {
+      'Threat': { icon: 'bi-bug-fill', c: '#ef4444', bg: 'rgba(239,68,68,.13)' },
+      'Fundamental': { icon: 'bi-diagram-3-fill', c: '#6366f1', bg: 'rgba(99,102,241,.13)' },
+      'Control': { icon: 'bi-shield-fill-check', c: '#8b5cf6', bg: 'rgba(139,92,246,.13)' },
+      'Monitoring': { icon: 'bi-activity', c: '#06b6d4', bg: 'rgba(6,182,212,.13)' },
+      'Application': { icon: 'bi-code-slash', c: '#10b981', bg: 'rgba(16,185,129,.13)' },
+      'Cloud': { icon: 'bi-cloud-fill', c: '#38bdf8', bg: 'rgba(56,189,248,.13)' },
+      'Data': { icon: 'bi-database-fill-lock', c: '#f59e0b', bg: 'rgba(245,158,11,.13)' },
+      'Wireless': { icon: 'bi-wifi', c: '#34d399', bg: 'rgba(52,211,153,.13)' },
+      'Access': { icon: 'bi-person-badge-fill', c: '#a78bfa', bg: 'rgba(167,139,250,.13)' },
+      'Identification': { icon: 'bi-person-badge-fill', c: '#a78bfa', bg: 'rgba(167,139,250,.13)' },
+      'IoT': { icon: 'bi-cpu-fill', c: '#fbbf24', bg: 'rgba(251,191,36,.13)' },
+      'Forensic': { icon: 'bi-search', c: '#f97316', bg: 'rgba(249,115,22,.13)' },
+      'Continuity': { icon: 'bi-arrow-repeat', c: '#10b981', bg: 'rgba(16,185,129,.13)' },
+      'Risk': { icon: 'bi-graph-up-arrow', c: '#ec4899', bg: 'rgba(236,72,153,.13)' },
+      'Cryptograph': { icon: 'bi-lock-fill', c: '#7c3aed', bg: 'rgba(124,58,237,.13)' },
+      'Incident': { icon: 'bi-lightning-charge-fill', c: '#ef4444', bg: 'rgba(239,68,68,.13)' },
+      'Assessment': { icon: 'bi-bullseye', c: '#f97316', bg: 'rgba(249,115,22,.13)' },
+      'Mobile': { icon: 'bi-phone-fill', c: '#38bdf8', bg: 'rgba(56,189,248,.13)' },
+      'Troubleshoot': { icon: 'bi-tools', c: '#6366f1', bg: 'rgba(99,102,241,.13)' },
+      'Traffic': { icon: 'bi-speedometer2', c: '#06b6d4', bg: 'rgba(6,182,212,.13)' },
+      'Log': { icon: 'bi-journal-code', c: '#8b5cf6', bg: 'rgba(139,92,246,.13)' },
+      'Physical': { icon: 'bi-building-lock', c: '#d97706', bg: 'rgba(217,119,6,.13)' },
+      'Administrative': { icon: 'bi-file-earmark-text-fill', c: '#64748b', bg: 'rgba(100,116,139,.13)' },
+    };
+
+    function getDomainCfg(name) {
+      for (const [kw, cfg] of Object.entries(DOMAIN_CFG)) {
+        if (name.includes(kw)) return cfg;
+      }
+      return { icon: 'bi-folder-fill', c: '#6366f1', bg: 'rgba(99,102,241,.13)' };
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.domain-card').forEach(card => {
+        const cfg = getDomainCfg(card.dataset.domain);
+        const iconEl = card.querySelector('.domain-card-icon');
+        iconEl.innerHTML = `<i class="bi ${cfg.icon}"></i>`;
+        iconEl.style.color = cfg.c;
+        iconEl.style.background = cfg.bg;
+      });
+
+      const stats = JSON.parse(localStorage.getItem('cct_stats') || '{"attempts":0,"corrects":0,"streak":0}');
+      if (stats.attempts > 0) {
+        const acc = Math.round((stats.corrects / stats.attempts) * 100);
+        document.getElementById('stat-acc').textContent = acc + '%';
+      }
+      document.getElementById('stat-streak').textContent = stats.streak || 0;
+    });
+  </script>
+</body>
+</html>

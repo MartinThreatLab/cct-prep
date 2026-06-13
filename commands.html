@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCT Exam Prep - Referencia de Comandos</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CCT Prep">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <div class="brand-icon"><i class="bi bi-shield-lock-fill"></i></div>
+      <div class="brand-title">CCT<span>Prep</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link"><i class="bi bi-grid-fill"></i> Dashboard</a>
+      <a href="quiz.html" class="nav-link"><i class="bi bi-play-circle-fill"></i> Iniciar Quiz</a>
+      <a href="commands.html" class="nav-link active"><i class="bi bi-terminal-fill"></i> Comandos</a>
+    </div>
+  </nav>
+
+  <!-- Barra de búsqueda sticky -->
+  <div class="cmd-search-bar">
+    <div class="cmd-search-inner">
+      <div class="cmd-search-input-wrap">
+        <i class="bi bi-search"></i>
+        <input id="cmd-search" class="cmd-search-input" type="text" placeholder="Buscar comando, herramienta o descripción...">
+      </div>
+      <button id="btn-flashcard" class="btn btn-primary" style="white-space: nowrap;">
+        <i class="bi bi-card-text"></i> Modo Flashcard
+      </button>
+    </div>
+  </div>
+
+  <div class="container" style="max-width: 1100px;">
+
+    <div class="card" style="margin-bottom: 2rem;">
+      <h1 style="margin-bottom: 0.75rem;"><i class="bi bi-terminal-fill" style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> Referencia de Comandos CCT</h1>
+      <p class="lead" style="margin-bottom: 0;">
+        Todos los comandos y herramientas que necesitas dominar para el examen CCT de EC-Council. Haz clic en cualquier comando para copiarlo al portapapeles, o usa el <strong>Modo Flashcard</strong> para memorizar cada uno.
+      </p>
+    </div>
+
+    <!-- No-results mensaje -->
+    <div class="cmd-no-results" id="cmd-no-results">
+      <i class="bi bi-search"></i>
+      No se encontraron comandos para "<span id="no-results-term"></span>"
+    </div>
+
+    <!-- Navegación de secciones -->
+    <div class="cmd-nav">
+      <a href="#nmap" class="cmd-nav-pill"><i class="bi bi-radar"></i> Nmap</a>
+      <a href="#network-diag" class="cmd-nav-pill"><i class="bi bi-diagram-3-fill"></i> Diagnóstico Red</a>
+      <a href="#forensics" class="cmd-nav-pill"><i class="bi bi-search"></i> Forense</a>
+      <a href="#hashing" class="cmd-nav-pill"><i class="bi bi-hash"></i> Hashing</a>
+      <a href="#password" class="cmd-nav-pill"><i class="bi bi-key-fill"></i> Contraseñas</a>
+      <a href="#linux" class="cmd-nav-pill"><i class="bi bi-terminal"></i> Linux</a>
+      <a href="#windows" class="cmd-nav-pill"><i class="bi bi-windows"></i> Windows</a>
+      <a href="#wireshark" class="cmd-nav-pill"><i class="bi bi-activity"></i> Wireshark</a>
+      <a href="#event-ids" class="cmd-nav-pill"><i class="bi bi-clipboard-data-fill"></i> Event IDs</a>
+      <a href="#ports" class="cmd-nav-pill"><i class="bi bi-plug-fill"></i> Puertos Clave</a>
+    </div>
+
+    <!-- ===== NMAP ===== -->
+    <section id="nmap" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"><i class="bi bi-radar"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Nmap — Network Mapper</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Herramienta de descubrimiento de red y auditoría de seguridad</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -sS &lt;target&gt;</span></div>
+          <div class="cmd-desc">SYN Stealth Scan (half-open). El más usado. Requiere privilegios root.</div>
+          <div class="cmd-tags"><span class="tag tag-recon">Reconocimiento</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -sV &lt;target&gt;</span></div>
+          <div class="cmd-desc">Detecta versiones de servicios corriendo en los puertos abiertos.</div>
+          <div class="cmd-tags"><span class="tag tag-enum">Enumeración</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -O &lt;target&gt;</span></div>
+          <div class="cmd-desc">Detección de sistema operativo (OS fingerprinting via TCP/IP stack).</div>
+          <div class="cmd-tags"><span class="tag tag-recon">Reconocimiento</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -A &lt;target&gt;</span></div>
+          <div class="cmd-desc">Scan agresivo: OS detection + service versions + script scan + traceroute.</div>
+          <div class="cmd-tags"><span class="tag tag-enum">Enumeración</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -sU -p 53,161 &lt;target&gt;</span></div>
+          <div class="cmd-desc">UDP scan en puertos específicos (DNS=53, SNMP=161). Más lento que TCP.</div>
+          <div class="cmd-tags"><span class="tag tag-recon">Reconocimiento</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -p 1-65535 &lt;target&gt;</span></div>
+          <div class="cmd-desc">Escanear todos los puertos (1-65535). Completo pero lento.</div>
+          <div class="cmd-tags"><span class="tag tag-recon">Reconocimiento</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -sn 192.168.1.0/24</span></div>
+          <div class="cmd-desc">Ping sweep: descubrir hosts activos en una subred (sin port scan).</div>
+          <div class="cmd-tags"><span class="tag tag-recon">Reconocimiento</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -sF &lt;target&gt;</span></div>
+          <div class="cmd-desc">FIN scan: envía paquetes TCP FIN. Útil para evadir firewalls stateless.</div>
+          <div class="cmd-tags"><span class="tag tag-evasion">Evasión</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap --script vuln &lt;target&gt;</span></div>
+          <div class="cmd-desc">NSE Script: ejecuta scripts de detección de vulnerabilidades conocidas.</div>
+          <div class="cmd-tags"><span class="tag tag-vuln">Vulnerabilidades</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">nmap -oX output.xml &lt;target&gt;</span></div>
+          <div class="cmd-desc">Guardar resultado en formato XML (compatible con Metasploit, etc.).</div>
+          <div class="cmd-tags"><span class="tag tag-util">Utilidad</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DIAGNÓSTICO DE RED ===== -->
+    <section id="network-diag" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="bi bi-diagram-3-fill"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Diagnóstico de Red</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Comandos esenciales de troubleshooting en Windows y Linux</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">ipconfig /all</span></div>
+          <div class="cmd-desc"><strong>Windows.</strong> Muestra configuración completa: IPs, MAC, DNS, DHCP lease, gateway.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">ifconfig</span> <span style="color:var(--text-muted);">/ ip addr</span></div>
+          <div class="cmd-desc"><strong>Linux.</strong> Muestra configuración de interfaces de red. <code>ip addr</code> es el comando moderno.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">ping 8.8.8.8</span></div>
+          <div class="cmd-desc">Prueba conectividad usando ICMP Echo Request/Reply. Verifica si el host responde.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">tracert 8.8.8.8</span></div>
+          <div class="cmd-desc"><strong>Windows</strong> (<code>traceroute</code> en Linux). Traza el camino de paquetes, mostrando cada hop/router. Detecta dónde se pierden paquetes.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">netstat -ano</span></div>
+          <div class="cmd-desc"><strong>Windows.</strong> Muestra todas las conexiones TCP/UDP activas con sus PID. Ideal para detectar conexiones maliciosas.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">netstat -tulnp</span></div>
+          <div class="cmd-desc"><strong>Linux.</strong> Muestra puertos TCP/UDP en escucha con el proceso asociado.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">arp -a</span></div>
+          <div class="cmd-desc">Muestra la tabla ARP: mapeo IP→MAC de dispositivos en la red local. Detectar ARP Poisoning.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">nslookup google.com</span></div>
+          <div class="cmd-desc">Consulta DNS: traduce hostname a IP. Diagnóstico de resolución de nombres.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">dig @8.8.8.8 google.com</span></div>
+          <div class="cmd-desc"><strong>Linux.</strong> Consulta DNS avanzada. Puedes especificar el servidor DNS y tipo de registro (A, MX, NS, etc.).</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">route print</span></div>
+          <div class="cmd-desc"><strong>Windows</strong> (<code>ip route</code> en Linux). Muestra la tabla de enrutamiento del sistema.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-linux">Linux</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FORENSE DIGITAL ===== -->
+    <section id="forensics" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="bi bi-search"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Forense Digital</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Adquisición de evidencia, análisis de memoria y disco</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">dd if=/dev/sda of=/mnt/evidence.img bs=4096</span></div>
+          <div class="cmd-desc"><strong>Linux.</strong> Crea una imagen forense bit a bit del disco. Esencial para preservar evidencia sin modificar el original.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-forensics">Forense</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">md5sum evidence.img</span></div>
+          <div class="cmd-desc">Genera el hash MD5 de la imagen forense. Verificar integridad (Chain of Custody).</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-forensics">Forense</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">sha256sum evidence.img</span></div>
+          <div class="cmd-desc">Genera hash SHA-256 (más seguro que MD5). Preferido en investigaciones actuales para verificar integridad.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-forensics">Forense</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">volatility -f memory.dmp imageinfo</span></div>
+          <div class="cmd-desc">Volatility Framework: identifica el perfil del sistema operativo del volcado de RAM.</div>
+          <div class="cmd-tags"><span class="tag tag-forensics">Forense</span><span class="tag tag-memory">Memoria</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">volatility -f mem.dmp --profile=Win10x64 pslist</span></div>
+          <div class="cmd-desc">Lista procesos activos en el volcado de RAM. Detectar procesos maliciosos o inusuales.</div>
+          <div class="cmd-tags"><span class="tag tag-forensics">Forense</span><span class="tag tag-memory">Memoria</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">volatility -f mem.dmp --profile=Win10x64 netscan</span></div>
+          <div class="cmd-desc">Muestra conexiones de red activas encontradas en la memoria RAM. Identificar C2 servers.</div>
+          <div class="cmd-tags"><span class="tag tag-forensics">Forense</span><span class="tag tag-memory">Memoria</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">strings evidence.img | grep -i password</span></div>
+          <div class="cmd-desc">Extrae cadenas de texto legibles de una imagen de disco y filtra por palabra clave.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-forensics">Forense</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">autopsy</span></div>
+          <div class="cmd-desc">Lanza Autopsy: GUI forense que analiza imágenes de disco, recupera archivos eliminados y examina metadatos.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-forensics">Forense</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">steghide extract -sf image.jpg</span></div>
+          <div class="cmd-desc">Extrae datos ocultos mediante esteganografía de una imagen JPEG (steganalysis).</div>
+          <div class="cmd-tags"><span class="tag tag-forensics">Forense</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HASHING ===== -->
+    <section id="hashing" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);"><i class="bi bi-hash"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Hashing &amp; Criptografía</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Verificación de integridad y funciones hash</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">echo -n "texto" | md5sum</span></div>
+          <div class="cmd-desc">Genera hash MD5 de un texto. MD5 = 128 bits. Vulnerable a colisiones. No usar para seguridad.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crypto">Crypto</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">echo -n "texto" | sha1sum</span></div>
+          <div class="cmd-desc">Genera hash SHA-1 = 160 bits. Deprecated: vulnerable a ataques de colisión. Reemplazado por SHA-256.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crypto">Crypto</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">echo -n "texto" | sha256sum</span></div>
+          <div class="cmd-desc">Genera hash SHA-256 = 256 bits. Estándar actual para integridad de archivos y contraseñas.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crypto">Crypto</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">certutil -hashfile archivo.txt SHA256</span></div>
+          <div class="cmd-desc"><strong>Windows.</strong> Calcula el hash SHA256 de un archivo. También soporta MD5, SHA1, SHA512.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-crypto">Crypto</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">openssl enc -aes-256-cbc -in file.txt -out file.enc</span></div>
+          <div class="cmd-desc">Cifra un archivo con AES-256-CBC usando OpenSSL. Te pedirá una passphrase.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crypto">Crypto</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">openssl genrsa -out priv.pem 2048</span></div>
+          <div class="cmd-desc">Genera un par de claves RSA de 2048 bits (clave privada). Criptografía asimétrica.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crypto">Crypto</span></div>
+        </div>
+      </div>
+      <!-- Tabla de referencia rápida -->
+      <div class="ref-table-wrap">
+        <h3 class="ref-table-title">Referencia Rápida: Algoritmos Hash</h3>
+        <table class="ref-table">
+          <thead><tr><th>Algoritmo</th><th>Bits de Salida</th><th>Estado</th><th>Uso Recomendado</th></tr></thead>
+          <tbody>
+            <tr><td>MD5</td><td>128 bits</td><td><span class="status-bad">Vulnerable</span></td><td>Solo verificación rápida no-crítica</td></tr>
+            <tr><td>SHA-1</td><td>160 bits</td><td><span class="status-bad">Deprecated</span></td><td>Legacy, evitar en nuevos sistemas</td></tr>
+            <tr><td>SHA-256</td><td>256 bits</td><td><span class="status-good">Seguro</span></td><td>Contraseñas, certificados, integridad</td></tr>
+            <tr><td>SHA-512</td><td>512 bits</td><td><span class="status-good">Seguro</span></td><td>Alta seguridad requerida</td></tr>
+            <tr><td>bcrypt</td><td>Variable</td><td><span class="status-good">Seguro</span></td><td>Almacenamiento de contraseñas</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== CONTRASEÑAS / CRACKING ===== -->
+    <section id="password" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);"><i class="bi bi-key-fill"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Cracking de Contraseñas</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Herramientas de auditoría de credenciales (uso ético)</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt</span></div>
+          <div class="cmd-desc">John the Ripper: ataque de diccionario con rockyou.txt contra un archivo de hashes.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crack">Cracking</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">john --show hashes.txt</span></div>
+          <div class="cmd-desc">Muestra las contraseñas ya crackeadas por John the Ripper de un archivo de hashes.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crack">Cracking</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">hashcat -m 1000 -a 0 hashes.txt rockyou.txt</span></div>
+          <div class="cmd-desc">Hashcat: -m 1000 = NTLM, -a 0 = ataque diccionario. Usa GPU para velocidad máxima.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crack">Cracking</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">hashcat -m 0 -a 3 hash.txt ?a?a?a?a?a?a</span></div>
+          <div class="cmd-desc">Hashcat: -m 0 = MD5, -a 3 = brute force, mask <code>?a</code> = any printable char. 6 caracteres.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crack">Cracking</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">hydra -l admin -P rockyou.txt ftp://&lt;target&gt;</span></div>
+          <div class="cmd-desc">Hydra: brute-force de credenciales FTP. Soporta SSH, HTTP, RDP, SMTP, etc.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-crack">Cracking</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">ftp &lt;target_ip&gt;</span></div>
+          <div class="cmd-desc">Conectarse a un servidor FTP. Ingresar usuario y contraseña cuando se soliciten.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-win">Windows</span></div>
+        </div>
+      </div>
+      <div class="ref-table-wrap">
+        <h3 class="ref-table-title">Modos Comunes de Hashcat (-m)</h3>
+        <table class="ref-table">
+          <thead><tr><th>Modo (-m)</th><th>Tipo de Hash</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>MD5</td><td>d41d8cd98f00b204e9800998ecf8427e</td></tr>
+            <tr><td>100</td><td>SHA-1</td><td>da39a3ee5e6b4b0d3255bfef95601890...</td></tr>
+            <tr><td>1000</td><td>NTLM (Windows)</td><td>31d6cfe0d16ae931b73c59d7e0c089c0</td></tr>
+            <tr><td>1800</td><td>sha512crypt (Linux)</td><td>$6$rounds=5000$...</td></tr>
+            <tr><td>3200</td><td>bcrypt</td><td>$2y$12$...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== LINUX ===== -->
+    <section id="linux" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);"><i class="bi bi-terminal"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Linux — Seguridad y Administración</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Comandos de hardening, permisos y logs</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">chmod 755 script.sh</span></div>
+          <div class="cmd-desc">Permisos: 7=rwx (owner), 5=r-x (group), 5=r-x (others). Propietario: lectura+escritura+ejecución. Resto: solo lectura y ejecución.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">chmod 644 archivo.conf</span></div>
+          <div class="cmd-desc">Permisos: 6=rw- (owner), 4=r-- (group), 4=r-- (others). Típico para archivos de configuración.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">chown user:group archivo</span></div>
+          <div class="cmd-desc">Cambia el propietario y grupo de un archivo o directorio.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">cat /var/log/auth.log | grep "Failed"</span></div>
+          <div class="cmd-desc"><strong>Debian/Ubuntu.</strong> Revisa intentos de login fallidos en auth.log. Detectar brute-force SSH.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span><span class="tag tag-forensics">Forense</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">cat /var/log/syslog</span></div>
+          <div class="cmd-desc">Log general del sistema en Debian/Ubuntu. Eventos de kernel, daemons y aplicaciones.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">cat /var/log/messages</span></div>
+          <div class="cmd-desc">Log general en <strong>RedHat/CentOS</strong>. Equivalente a syslog en sistemas basados en Red Hat.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">ps aux</span></div>
+          <div class="cmd-desc">Lista todos los procesos activos con usuario, PID, CPU y comando. Detectar procesos sospechosos.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">ssh user@192.168.1.10</span></div>
+          <div class="cmd-desc">Conectarse a host remoto por SSH (puerto 22). Sesión de terminal cifrada.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">ufw enable &amp;&amp; ufw allow 22/tcp</span></div>
+          <div class="cmd-desc">Activa el firewall UFW en Ubuntu y permite SSH. Hardening básico de servidor Linux.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+      </div>
+      <div class="ref-table-wrap">
+        <h3 class="ref-table-title">Archivos de Log Clave en Linux</h3>
+        <table class="ref-table">
+          <thead><tr><th>Archivo</th><th>Contenido</th><th>Distro</th></tr></thead>
+          <tbody>
+            <tr><td><code>/var/log/auth.log</code></td><td>Autenticaciones SSH, sudo, PAM</td><td>Debian/Ubuntu</td></tr>
+            <tr><td><code>/var/log/secure</code></td><td>Autenticaciones SSH, sudo</td><td>RedHat/CentOS</td></tr>
+            <tr><td><code>/var/log/syslog</code></td><td>Log general del sistema</td><td>Debian/Ubuntu</td></tr>
+            <tr><td><code>/var/log/messages</code></td><td>Log general del sistema</td><td>RedHat/CentOS</td></tr>
+            <tr><td><code>/var/log/dmesg</code></td><td>Mensajes del kernel (boot)</td><td>Ambas</td></tr>
+            <tr><td><code>/var/log/apache2/access.log</code></td><td>Peticiones HTTP al servidor web</td><td>Debian/Ubuntu</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== WINDOWS ===== -->
+    <section id="windows" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);"><i class="bi bi-windows"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Windows — Administración y Seguridad</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">PowerShell, CMD y herramientas del sistema</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">net user</span></div>
+          <div class="cmd-desc">Lista todas las cuentas de usuario locales del sistema. Detectar cuentas no autorizadas.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">net user hacker P@ssw0rd /add</span></div>
+          <div class="cmd-desc">Crea una cuenta de usuario local (usado en escalada de privilegios, para detectarlo con auditoría).</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">net localgroup administrators</span></div>
+          <div class="cmd-desc">Lista los miembros del grupo Administradores locales. Auditar privilegios elevados.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">tasklist</span></div>
+          <div class="cmd-desc">Lista todos los procesos en ejecución (equivalente a ps en Linux). Detectar procesos maliciosos.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">PS&gt;</span> <span class="cmd-code">Get-EventLog -LogName Security -Newest 50</span></div>
+          <div class="cmd-desc">PowerShell: obtiene los 50 eventos más recientes del log de seguridad de Windows.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-ps">PowerShell</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">PS&gt;</span> <span class="cmd-code">Get-EventLog -LogName Security -InstanceId 4625</span></div>
+          <div class="cmd-desc">PowerShell: filtra el log de seguridad por Event ID 4625 (logon fallido). Detectar brute-force.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span><span class="tag tag-ps">PowerShell</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">sfc /scannow</span></div>
+          <div class="cmd-desc">System File Checker: verifica y repara archivos de sistema de Windows corruptos.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">&gt;</span> <span class="cmd-code">gpresult /r</span></div>
+          <div class="cmd-desc">Muestra los Group Policy Objects (GPO) aplicados al usuario y máquina actual.</div>
+          <div class="cmd-tags"><span class="tag tag-win">Windows</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WIRESHARK ===== -->
+    <section id="wireshark" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"><i class="bi bi-activity"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Wireshark — Filtros de Captura</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Filtros BPF (capture) y Display Filters para análisis de tráfico</p>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">▶</span> <span class="cmd-code">ip.addr == 192.168.1.10</span></div>
+          <div class="cmd-desc">Display Filter: muestra solo tráfico desde o hacia la IP especificada.</div>
+          <div class="cmd-tags"><span class="tag tag-util">Display Filter</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">▶</span> <span class="cmd-code">tcp.port == 80</span></div>
+          <div class="cmd-desc">Display Filter: filtra todo el tráfico TCP en el puerto 80 (HTTP).</div>
+          <div class="cmd-tags"><span class="tag tag-util">Display Filter</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">▶</span> <span class="cmd-code">http.request.method == "POST"</span></div>
+          <div class="cmd-desc">Filtra peticiones HTTP POST. Útil para encontrar envío de formularios o credenciales.</div>
+          <div class="cmd-tags"><span class="tag tag-util">Display Filter</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">▶</span> <span class="cmd-code">tcp.flags.syn == 1 &amp;&amp; tcp.flags.ack == 0</span></div>
+          <div class="cmd-desc">Detecta SYN scans (Nmap -sS): paquetes SYN sin ACK = inicio de handshake sin completar.</div>
+          <div class="cmd-tags"><span class="tag tag-util">Display Filter</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">▶</span> <span class="cmd-code">dns</span></div>
+          <div class="cmd-desc">Muestra solo tráfico DNS. Útil para detectar DNS tunneling o exfiltración.</div>
+          <div class="cmd-tags"><span class="tag tag-util">Display Filter</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">▶</span> <span class="cmd-code">icmp</span></div>
+          <div class="cmd-desc">Filtra solo tráfico ICMP (ping). Detectar ping floods o ICMP tunneling.</div>
+          <div class="cmd-tags"><span class="tag tag-util">Display Filter</span></div>
+        </div>
+        <div class="cmd-card" onclick="copyCmd(this)">
+          <div class="cmd-line"><span class="cmd-prompt">$</span> <span class="cmd-code">tshark -i eth0 -w capture.pcap</span></div>
+          <div class="cmd-desc">TShark (Wireshark CLI): captura tráfico de la interfaz eth0 a un archivo .pcap.</div>
+          <div class="cmd-tags"><span class="tag tag-linux">Linux</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WINDOWS EVENT IDS ===== -->
+    <section id="event-ids" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="bi bi-clipboard-data-fill"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Windows Event IDs — Clave para el Examen</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Los Event IDs del Security Log que más aparecen en el CCT</p>
+        </div>
+      </div>
+      <div class="ref-table-wrap" style="margin-top: 0;">
+        <table class="ref-table">
+          <thead><tr><th>Event ID</th><th>Evento</th><th>Importancia para CCT</th></tr></thead>
+          <tbody>
+            <tr><td><strong>4624</strong></td><td>Logon exitoso</td><td>Detectar acceso de actores maliciosos que lograron autenticarse</td></tr>
+            <tr><td><strong>4625</strong></td><td>Logon fallido</td><td>Detectar brute-force y credential stuffing</td></tr>
+            <tr><td><strong>4634</strong></td><td>Logoff</td><td>Rastrear duración de sesiones de usuario</td></tr>
+            <tr><td><strong>4648</strong></td><td>Logon con credenciales explícitas</td><td>Detectar Pass-the-Hash y lateral movement</td></tr>
+            <tr><td><strong>4720</strong></td><td>Cuenta de usuario creada</td><td>Detectar persistencia de atacante (creación de backdoor user)</td></tr>
+            <tr><td><strong>4722</strong></td><td>Cuenta de usuario habilitada</td><td>Detectar reactivación de cuentas deshabilitadas</td></tr>
+            <tr><td><strong>4728</strong></td><td>Miembro añadido a grupo privilegiado</td><td>Detectar escalada de privilegios no autorizada</td></tr>
+            <tr><td><strong>4756</strong></td><td>Miembro añadido a grupo universal (AD)</td><td>Cambios en grupos de Active Directory</td></tr>
+            <tr><td><strong>4771</strong></td><td>Kerberos pre-auth fallido</td><td>Detectar Kerberoasting y ataques AS-REP Roasting</td></tr>
+            <tr><td><strong>4776</strong></td><td>Validación de credenciales (NTLM)</td><td>Detectar ataques Pass-the-Hash</td></tr>
+            <tr><td><strong>1102</strong></td><td>Audit log borrado</td><td>Detectar cubrimiento de huellas del atacante</td></tr>
+            <tr><td><strong>7045</strong></td><td>Servicio instalado</td><td>Detectar malware instalando servicios persistentes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== PUERTOS CLAVE ===== -->
+    <section id="ports" class="cmd-section">
+      <div class="cmd-section-header">
+        <div class="cmd-section-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);"><i class="bi bi-plug-fill"></i></div>
+        <div>
+          <h2 style="margin-bottom: 0.25rem;">Puertos y Protocolos Clave</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Los puertos que debes memorizar para el examen CCT</p>
+        </div>
+      </div>
+      <div class="ref-table-wrap" style="margin-top: 0;">
+        <table class="ref-table">
+          <thead><tr><th>Puerto</th><th>Protocolo</th><th>Descripción</th><th>Cifrado</th></tr></thead>
+          <tbody>
+            <tr><td>20/21</td><td>FTP</td><td>File Transfer Protocol (datos/control)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>22</td><td>SSH / SFTP / SCP</td><td>Secure Shell, transferencia segura de archivos</td><td><span class="status-good">Sí</span></td></tr>
+            <tr><td>23</td><td>Telnet</td><td>Terminal remota sin cifrar (deprecated)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>25</td><td>SMTP</td><td>Simple Mail Transfer Protocol (envío)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>53</td><td>DNS</td><td>Domain Name System (UDP/TCP)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>67/68</td><td>DHCP</td><td>Dynamic Host Config (server/client)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>80</td><td>HTTP</td><td>HyperText Transfer Protocol (web)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>110</td><td>POP3</td><td>Post Office Protocol v3 (email)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>143</td><td>IMAP</td><td>Internet Message Access Protocol</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>161/162</td><td>SNMP</td><td>Simple Network Management (poll/trap)</td><td><span class="status-bad">v1/v2</span></td></tr>
+            <tr><td>389</td><td>LDAP</td><td>Lightweight Directory Access Protocol</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>443</td><td>HTTPS</td><td>HTTP sobre TLS/SSL</td><td><span class="status-good">Sí</span></td></tr>
+            <tr><td>445</td><td>SMB</td><td>Server Message Block (compartir archivos)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>465/587</td><td>SMTPS/SMTP+STARTTLS</td><td>SMTP cifrado</td><td><span class="status-good">Sí</span></td></tr>
+            <tr><td>514</td><td>Syslog</td><td>Envío de logs a servidor central (UDP)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>636</td><td>LDAPS</td><td>LDAP sobre TLS</td><td><span class="status-good">Sí</span></td></tr>
+            <tr><td>993</td><td>IMAPS</td><td>IMAP sobre TLS/SSL</td><td><span class="status-good">Sí</span></td></tr>
+            <tr><td>995</td><td>POP3S</td><td>POP3 sobre TLS/SSL</td><td><span class="status-good">Sí</span></td></tr>
+            <tr><td>1433</td><td>MSSQL</td><td>Microsoft SQL Server</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>1723</td><td>PPTP</td><td>Point-to-Point Tunneling Protocol (VPN)</td><td><span class="status-bad">Débil</span></td></tr>
+            <tr><td>3306</td><td>MySQL</td><td>Base de datos MySQL</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>3389</td><td>RDP</td><td>Remote Desktop Protocol (Windows)</td><td><span class="status-good">Sí</span></td></tr>
+            <tr><td>4444</td><td>Metasploit</td><td>Puerto por defecto del Meterpreter listener</td><td>—</td></tr>
+            <tr><td>5900</td><td>VNC</td><td>Virtual Network Computing (escritorio remoto)</td><td><span class="status-bad">No</span></td></tr>
+            <tr><td>8080/8443</td><td>HTTP/HTTPS Alt</td><td>Puertos alternativos para servidores web</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <style>
+    /* Navegación de secciones */
+    .cmd-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .cmd-nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.85rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    .cmd-nav-pill:hover {
+      background: var(--primary-glow);
+      border-color: var(--primary);
+      color: var(--text-main);
+    }
+
+    /* Secciones de comandos */
+    .cmd-section {
+      margin-bottom: 3rem;
+    }
+    .cmd-section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .cmd-section-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    .cmd-section h2 { font-size: 1.5rem; margin-bottom: 0; }
+
+    /* Grid de tarjetas de comandos */
+    .cmd-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 720px) {
+      .cmd-grid { grid-template-columns: 1fr; }
+    }
+    .cmd-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(12px);
+      position: relative;
+    }
+    .cmd-card:hover {
+      border-color: rgba(99,102,241,0.4);
+      background: rgba(99,102,241,0.05);
+      transform: translateY(-2px);
+    }
+    .cmd-card:active {
+      transform: translateY(0);
+    }
+    .cmd-card::after {
+      content: '\F386';
+      font-family: 'Bootstrap-Icons';
+      position: absolute;
+      top: 0.75rem;
+      right: 0.85rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .cmd-card:hover::after { opacity: 1; }
+    .cmd-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      flex-wrap: wrap;
+    }
+    .cmd-prompt { color: var(--success); font-weight: 700; flex-shrink: 0; }
+    .cmd-code {
+      color: #a5f3fc;
+      background: rgba(165, 243, 252, 0.06);
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      word-break: break-all;
+    }
+    .cmd-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 0.6rem;
+    }
+    .cmd-desc code {
+      background: rgba(255,255,255,0.06);
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: #a5f3fc;
+    }
+    .cmd-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tag-recon   { background: rgba(99,102,241,0.15); color: var(--primary); }
+    .tag-enum    { background: rgba(139,92,246,0.15); color: #a78bfa; }
+    .tag-forensics { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .tag-memory  { background: rgba(245,158,11,0.1); color: #fbbf24; }
+    .tag-crypto  { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+    .tag-crack   { background: rgba(239,68,68,0.15); color: var(--danger); }
+    .tag-win     { background: rgba(14,165,233,0.15); color: #38bdf8; }
+    .tag-linux   { background: rgba(249,115,22,0.15); color: #fb923c; }
+    .tag-ps      { background: rgba(16,185,129,0.15); color: var(--success); }
+    .tag-evasion { background: rgba(239,68,68,0.1); color: #f87171; }
+    .tag-vuln    { background: rgba(239,68,68,0.15); color: var(--danger); }
+    .tag-util    { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+
+    /* Tablas de referencia */
+    .ref-table-wrap {
+      margin-top: 1.25rem;
+      background: rgba(255,255,255,0.01);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .ref-table-title {
+      padding: 0.85rem 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+      margin: 0;
+    }
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .ref-table th {
+      padding: 0.65rem 1rem;
+      text-align: left;
+      background: rgba(255,255,255,0.02);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .ref-table td {
+      padding: 0.65rem 1rem;
+      font-size: 0.88rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .ref-table code {
+      background: rgba(165,243,252,0.08);
+      color: #a5f3fc;
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+    }
+    .status-good { color: var(--success); font-weight: 700; }
+    .status-bad  { color: var(--danger); font-weight: 700; }
+
+    /* Toast de copiado */
+    #copy-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(22, 28, 45, 0.95);
+      border: 1px solid rgba(99,102,241,0.4);
+      color: var(--text-main);
+      padding: 0.6rem 1.25rem;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #copy-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+
+  <div id="copy-toast"><i class="bi bi-clipboard-check-fill" style="color: var(--success);"></i> Comando copiado al portapapeles</div>
+
+  <!-- ===== FLASHCARD OVERLAY ===== -->
+  <div class="flashcard-overlay" id="flashcard-overlay">
+    <div class="fc-toolbar">
+      <div class="fc-toolbar-left">
+        <button class="btn btn-secondary" id="fc-close" style="padding: 0.45rem 0.9rem; font-size: 0.88rem;">
+          <i class="bi bi-x-lg"></i> Salir
+        </button>
+        <span class="fc-toolbar-title"><i class="bi bi-card-text"></i> Modo Flashcard</span>
+      </div>
+      <span class="fc-progress-text" id="fc-progress-text">1 / 0</span>
+    </div>
+
+    <div class="fc-body">
+      <div class="fc-card">
+        <div class="fc-section-tag" id="fc-section-tag">Sección</div>
+        <div class="fc-command" id="fc-command">comando</div>
+        <div class="fc-answer" id="fc-answer">
+          <span class="fc-answer-label">Descripción</span>
+          <span id="fc-answer-text"></span>
+        </div>
+        <div class="fc-btns" id="fc-btns-reveal">
+          <button class="btn btn-secondary" id="fc-reveal">
+            <i class="bi bi-eye-fill"></i> Mostrar descripción
+          </button>
+        </div>
+        <div class="fc-btns" id="fc-btns-nav" style="display:none;">
+          <button class="btn btn-secondary" id="fc-prev">
+            <i class="bi bi-arrow-left-short"></i> Anterior
+          </button>
+          <button class="btn btn-primary" id="fc-next">
+            Siguiente <i class="bi bi-arrow-right-short"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-footer">
+      <div class="fc-progress-bar">
+        <div class="fc-progress-fill" id="fc-progress-fill"></div>
+      </div>
+      <span class="fc-progress-label" id="fc-footer-label">0 vistos</span>
+    </div>
+  </div>
+
+  <script>
+    function copyCmd(card) {
+      const codeEl = card.querySelector('.cmd-code');
+      if (!codeEl) return;
+      const text = codeEl.textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copy-toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+
+    /* ===== SEARCH ===== */
+    const searchInput = document.getElementById('cmd-search');
+    const noResults = document.getElementById('cmd-no-results');
+    const noResultsTerm = document.getElementById('no-results-term');
+
+    searchInput.addEventListener('input', () => {
+      const term = searchInput.value.toLowerCase().trim();
+      let totalVisible = 0;
+
+      document.querySelectorAll('.cmd-section').forEach(section => {
+        let sectionVisible = 0;
+        section.querySelectorAll('.cmd-card').forEach(card => {
+          const matches = !term || card.textContent.toLowerCase().includes(term);
+          card.style.display = matches ? '' : 'none';
+          if (matches) sectionVisible++;
+        });
+        section.style.display = sectionVisible === 0 ? 'none' : '';
+        totalVisible += sectionVisible;
+      });
+
+      noResults.style.display = (term && totalVisible === 0) ? 'block' : 'none';
+      noResultsTerm.textContent = term;
+    });
+
+    /* ===== FLASHCARD MODE ===== */
+    let flashcards = [];
+    let fcIndex = 0;
+
+    function buildFlashcards() {
+      flashcards = [];
+      document.querySelectorAll('.cmd-section').forEach(section => {
+        const sectionName = section.querySelector('h2') ? section.querySelector('h2').textContent.trim() : 'Comandos';
+        section.querySelectorAll('.cmd-card').forEach(card => {
+          const codeEl = card.querySelector('.cmd-code');
+          const descEl = card.querySelector('.cmd-desc');
+          if (!codeEl || !descEl) return;
+          const prompt = card.querySelector('.cmd-prompt') ? card.querySelector('.cmd-prompt').textContent.trim() : '$';
+          flashcards.push({
+            section: sectionName,
+            prompt,
+            command: codeEl.textContent.trim(),
+            desc: descEl.textContent.trim()
+          });
+        });
+      });
+      // Shuffle
+      for (let i = flashcards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+      }
+    }
+
+    function renderFlashcard() {
+      if (flashcards.length === 0) return;
+      const fc = flashcards[fcIndex];
+      document.getElementById('fc-section-tag').textContent = fc.section;
+      document.getElementById('fc-command').innerHTML =
+        `<span style="color:var(--success);font-weight:700;">${fc.prompt}</span> ${fc.command}`;
+      document.getElementById('fc-answer-text').textContent = fc.desc;
+      document.getElementById('fc-answer').classList.remove('visible');
+      document.getElementById('fc-btns-reveal').style.display = 'flex';
+      document.getElementById('fc-btns-nav').style.display = 'none';
+
+      const pct = ((fcIndex + 1) / flashcards.length * 100).toFixed(0);
+      document.getElementById('fc-progress-text').textContent = `${fcIndex + 1} / ${flashcards.length}`;
+      document.getElementById('fc-progress-fill').style.width = pct + '%';
+      document.getElementById('fc-footer-label').textContent = `${fcIndex + 1} vistos`;
+    }
+
+    document.getElementById('btn-flashcard').addEventListener('click', () => {
+      buildFlashcards();
+      fcIndex = 0;
+      renderFlashcard();
+      document.getElementById('flashcard-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('fc-close').addEventListener('click', () => {
+      document.getElementById('flashcard-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    document.getElementById('fc-reveal').addEventListener('click', () => {
+      document.getElementById('fc-answer').classList.add('visible');
+      document.getElementById('fc-btns-reveal').style.display = 'none';
+      document.getElementById('fc-btns-nav').style.display = 'flex';
+    });
+
+    document.getElementById('fc-next').addEventListener('click', () => {
+      fcIndex = (fcIndex + 1) % flashcards.length;
+      renderFlashcard();
+    });
+
+    document.getElementById('fc-prev').addEventListener('click', () => {
+      fcIndex = (fcIndex - 1 + flashcards.length) % flashcards.length;
+      renderFlashcard();
+    });
+
+    // Keyboard nav in flashcard mode
+    document.addEventListener('keydown', (e) => {
+      const overlay = document.getElementById('flashcard-overlay');
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'Escape') overlay.querySelector('#fc-close').click();
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        const reveal = document.getElementById('fc-btns-reveal');
+        if (reveal.style.display !== 'none') {
+          document.getElementById('fc-reveal').click();
+        } else {
+          document.getElementById('fc-next').click();
+        }
+      }
+      if (e.key === 'ArrowLeft') {
+        document.getElementById('fc-prev').click();
+      }
+    });
+  </script>
+</body>
+</html>
