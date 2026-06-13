@@ -19,6 +19,40 @@
   <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
 </head>
 <body>
+<div id="g" style="position:fixed;inset:0;z-index:9999;background:#0f1117;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;">
+  <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(99,102,241,0.35);border-radius:16px;padding:2.5rem 2rem;width:min(340px,90vw);text-align:center;">
+    <div style="width:56px;height:56px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.75rem;">&#128274;</div>
+    <h2 style="color:#f1f5f9;margin:0 0 0.5rem;font-size:1.4rem;font-weight:700;">CCT Prep</h2>
+    <p style="color:#64748b;font-size:0.88rem;margin:0 0 1.5rem;">Acceso privado</p>
+    <input id="pi" type="password" placeholder="Contrasena" autocomplete="current-password" autofocus
+      style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem 1rem;color:#f1f5f9;font-size:1rem;outline:none;margin-bottom:0.75rem;font-family:inherit;">
+    <button onclick="ca()"
+      style="width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:8px;padding:0.75rem;color:white;font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:0.3px;">
+      Entrar
+    </button>
+    <p id="pe" style="color:#ef4444;font-size:0.85rem;margin:0.75rem 0 0;display:none;">Contrasena incorrecta</p>
+  </div>
+</div>
+<script>
+  (function(){
+    if(localStorage.getItem('cct_auth')==='1'){
+      document.getElementById('g').style.display='none';return;
+    }
+    document.getElementById('pi').addEventListener('keydown',function(e){
+      if(e.key==='Enter')ca();
+    });
+  })();
+  function ca(){
+    if(document.getElementById('pi').value==='CCT2025'){
+      localStorage.setItem('cct_auth','1');
+      document.getElementById('g').style.display='none';
+    }else{
+      document.getElementById('pe').style.display='block';
+      document.getElementById('pi').value='';
+      document.getElementById('pi').focus();
+    }
+  }
+</script>
 
   <!-- Navbar -->
   <nav class="navbar">
