@@ -35,85 +35,60 @@
   </div>
 </div>
 <script>
+  // Hash SHA-256 de la contrasena — no reversible
+  var _H = 'ac99403d1b2a0d65100e65dcde419d2dfbee5124465e26d502a1ead5de13931a';
+  var _MAX = 3, _WAIT = 7*24*60*60*1000;
+
   (function(){
-    var MAX  = 3;
-    var WAIT = 7 * 24 * 60 * 60 * 1000; // 7 dias en ms
-
-    // Ya autenticado
-    if(localStorage.getItem('cct_auth') === '1'){
-      document.getElementById('g').style.display = 'none';
-      return;
+    if(localStorage.getItem('cct_auth')==='1'){
+      document.getElementById('g').style.display='none'; return;
     }
-
-    // Verificar bloqueo activo
-    var lock = localStorage.getItem('cct_lock');
+    var lock=localStorage.getItem('cct_lock');
     if(lock){
-      var remaining = parseInt(lock) + WAIT - Date.now();
-      if(remaining > 0){
-        var days  = Math.floor(remaining / (24*60*60*1000));
-        var hours = Math.ceil(remaining  / (60*60*1000));
-        var msg   = days >= 1
-          ? 'Bloqueado. Intenta en ' + (days + 1) + ' dias.'
-          : 'Bloqueado. Intenta en ' + hours + ' hora' + (hours !== 1 ? 's.' : '.');
-        showError(msg);
-        lockUI();
-        return;
-      } else {
-        // Bloqueo expirado
-        localStorage.removeItem('cct_lock');
-        localStorage.removeItem('cct_tries');
+      var rem=parseInt(lock)+_WAIT-Date.now();
+      if(rem>0){
+        var d=Math.floor(rem/(24*60*60*1000)), h=Math.ceil(rem/(60*60*1000));
+        _err(d>=1?'Bloqueado. Intenta en '+(d+1)+' dias.':'Bloqueado. Intenta en '+h+' hora'+(h!==1?'s.':'.'));
+        _lock(); return;
       }
+      localStorage.removeItem('cct_lock'); localStorage.removeItem('cct_tries');
     }
-
     document.getElementById('pi').focus();
-    document.getElementById('pi').addEventListener('keydown', function(e){
-      if(e.key === 'Enter') ca();
-    });
+    document.getElementById('pi').addEventListener('keydown',function(e){if(e.key==='Enter')ca();});
   })();
 
-  function ca(){
-    var MAX  = 3;
-    var WAIT = 7 * 24 * 60 * 60 * 1000;
-    var pi   = document.getElementById('pi');
+  async function ca(){
+    var lock=localStorage.getItem('cct_lock');
+    if(lock && parseInt(lock)+_WAIT>Date.now()) return;
 
-    // Verificar bloqueo (por si acaso)
-    var lock = localStorage.getItem('cct_lock');
-    if(lock && (parseInt(lock) + WAIT - Date.now() > 0)) return;
+    var val=document.getElementById('pi').value;
+    var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(val));
+    var hex=Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
 
-    if(pi.value === 'CCT2025'){
-      localStorage.setItem('cct_auth', '1');
-      localStorage.removeItem('cct_tries');
-      localStorage.removeItem('cct_lock');
-      document.getElementById('g').style.display = 'none';
+    if(hex===_H){
+      localStorage.setItem('cct_auth','1');
+      localStorage.removeItem('cct_tries'); localStorage.removeItem('cct_lock');
+      document.getElementById('g').style.display='none';
     } else {
-      var tries = parseInt(localStorage.getItem('cct_tries') || '0') + 1;
-      localStorage.setItem('cct_tries', tries);
-      pi.value = '';
-      pi.focus();
-
-      if(tries >= MAX){
-        localStorage.setItem('cct_lock', Date.now().toString());
-        showError('Demasiados intentos. Acceso bloqueado por 7 dias.');
-        lockUI();
+      var t=parseInt(localStorage.getItem('cct_tries')||'0')+1;
+      localStorage.setItem('cct_tries',t);
+      document.getElementById('pi').value='';
+      document.getElementById('pi').focus();
+      if(t>=_MAX){
+        localStorage.setItem('cct_lock',Date.now().toString());
+        _err('Demasiados intentos. Bloqueado por 7 dias.'); _lock();
       } else {
-        var left = MAX - tries;
-        showError('Contrasena incorrecta. ' + left + ' intento' + (left !== 1 ? 's' : '') + ' restante' + (left !== 1 ? 's.' : '.'));
+        var l=_MAX-t;
+        _err('Contrasena incorrecta. '+l+' intento'+(l!==1?'s':'')+' restante'+(l!==1?'s.':'.'));
       }
     }
   }
 
-  function showError(msg){
-    var pe = document.getElementById('pe');
-    pe.textContent = msg;
-    pe.style.display = 'block';
-  }
-
-  function lockUI(){
-    document.getElementById('pi').disabled = true;
-    document.getElementById('pi').style.opacity = '0.35';
-    document.getElementById('gb').disabled = true;
-    document.getElementById('gb').style.opacity = '0.35';
-    document.getElementById('gb').style.cursor = 'not-allowed';
+  function _err(m){var e=document.getElementById('pe');e.textContent=m;e.style.display='block';}
+  function _lock(){
+    var pi=document.getElementById('pi'),gb=document.getElementById('gb');
+    pi.disabled=true; pi.style.opacity='0.35';
+    gb.disabled=true; gb.style.opacity='0.35'; gb.style.cursor='not-allowed';
   }
 </script>
 <!-- /AUTH_GATE -->
